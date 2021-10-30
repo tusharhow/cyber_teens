@@ -1,4 +1,5 @@
 import 'package:cyber_teens/constants.dart';
+import 'package:cyber_teens/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 
 class Onboard extends StatelessWidget {
@@ -26,7 +27,12 @@ class Onboard extends StatelessWidget {
           SizedBox(
             height: 110,
           ),
-          PrimaryButton(),
+          PrimaryButton(
+            OnPress: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (ctx) => LoginScreen()));
+            },
+          ),
         ],
       ),
     );
@@ -36,36 +42,41 @@ class Onboard extends StatelessWidget {
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     Key? key,
+    required this.OnPress,
   }) : super(key: key);
+  final Function OnPress;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width / 1.25,
-      decoration: BoxDecoration(
-        color: defaultColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: const [
-          SizedBox(
-            width: 110,
-          ),
-          Center(
-            child: Text(
-              'Get Started',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
+    return InkWell(
+      onTap: OnPress as void Function(),
+      child: Container(
+        height: 50,
+        width: MediaQuery.of(context).size.width / 1.25,
+        decoration: BoxDecoration(
+          color: defaultColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: const [
+            SizedBox(
+              width: 110,
+            ),
+            Center(
+              child: Text(
+                'Get Started',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 30,
-          ),
-          Icon(Icons.keyboard_arrow_right, size: 30, color: Colors.white)
-        ],
+            SizedBox(
+              width: 30,
+            ),
+            Icon(Icons.keyboard_arrow_right, size: 30, color: Colors.white)
+          ],
+        ),
       ),
     );
   }
